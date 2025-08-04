@@ -1,0 +1,38 @@
+//////vars
+.at__not-found-container {
+	width: 100%;
+	max-width: 640px;
+	height: 100%;
+	max-height: 100vh;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-items: center;
+	justify-content: center;
+	align-items: center;
+	button {
+		svg {
+			transform: rotate(180deg);
+			position: relative;
+			top: 4px;
+		}
+	}
+	p {
+		margin: 0px 0px 20px 0px;
+	}
+	h1 {
+		margin-bottom: 0.3em;
+	}
+}
+
+.at__not-found-card__image {
+	width: 80%;
+	margin-bottom: 0px;
+	text-align: center;
+}
+
+@media only screen and (min-width: 760px)
+{
+	
+
+}

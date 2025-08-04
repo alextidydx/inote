@@ -1,0 +1,31 @@
+{
+	"name" : "iNote",
+	"version" : "0.1",
+	"build" : "Alpha",
+	"imageExts" : [
+		".png", 
+		".jpg", 
+		".jpeg", 
+		".jfif",
+		".webp"
+	],
+	"vidExts" : [
+		".avi", 
+		".mp4", 
+		".mpeg4", 
+		".mov", 
+		".mkv", 
+		".gif"
+	],
+	"users" : [
+		{
+			"login" : "admin",
+			"password" : "admin"
+		}
+	],
+	"dbPath" : "main.db",
+	"host" : "0.0.0.0",
+	"port" : 5000,
+	"publicFolder" : "public"
+	
+}	

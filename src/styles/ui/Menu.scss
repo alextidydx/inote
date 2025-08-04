@@ -1,0 +1,89 @@
+.at__menu {
+	position: absolute;
+	bottom: 0%;
+	width: 100%;
+	left: 0;
+	right: 0;
+	display: flex;
+	pointer-events: none;
+	top:0;
+	flex-direction: row;
+	user-select: none;
+}
+
+.at__menu-bar-container {
+	box-shadow: 0px 2px 4px rgba(0,0,10,0.5);
+	position: absolute;
+	bottom: 8%;
+	width: 90%;
+	height: 90px;
+	left: 5%;
+	right: 5%;
+	border-radius: 20px;
+	transition: box-shadow 200ms linear, background-color 200ms linear, line-height 200ms linear;
+	background: linear-gradient(00deg, rgba(12,12,12,1) 0%, rgba(40,40,50,1) 60px);
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	pointer-events: all;
+}
+
+
+.at__menu-button {
+	width: 20%;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	flex-direction: column;
+	transition: box-shadow 200ms linear, background-color 200ms linear, color 200ms linear;
+	svg {
+		height: 35px;
+		fill: #fff;
+		transition: box-shadow 200ms linear, background-color 200ms linear, fill 200ms linear, height 200ms ease ;
+		path {
+			box-shadow: 0px 0px 6px rgba(240,240,250,1.0);
+			transition: box-shadow 200ms linear, background-color 200ms linear, fill 200ms linear, height 200ms ease ;
+			fill: #eef;
+		}
+	}
+	p {
+		color: #eef;
+		margin: 4px 0px 0px 0px;
+		font-size: 0.7em;
+		font-weight: 200;
+		line-height: 0.9em;
+		transition: opacity 200ms linear;
+		opacity: 0.9;
+	}
+	&:hover {
+		background-color: rgba(240, 240, 250, 0.1);
+		border-radius: 20px;
+		p {
+			color: #fff;
+		}
+		svg {
+			height: 35px;
+			fill: #fff;
+			path {
+				fill: #fff;
+			}
+		}
+	}
+	&.at__menu-button--active {
+		svg { 
+			box-shadow: 0px 0px 6px rgba(240,240,250,0.4);
+		}
+	}
+	&.at__menu-button--main {
+		border-radius: 20px;
+		background-color: #693ac0;
+		color: #000;
+		&:hover {
+			background-color: #7f4fd6;
+		}
+		&:active {
+			background-color: #6a29e1;
+		}
+	}
+}
