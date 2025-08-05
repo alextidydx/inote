@@ -10,8 +10,9 @@ import '../../../styles/ui/Feed.scss'
 
 import Menu from '../ui/Menu';
 import WidgetText from '../ui/WidgetText';
-
-
+import WidgetVoice from '../ui/WidgetVoice';
+import WidgetChart from '../ui/WidgetChart';
+import WidgetImage from '../ui/WidgetImage';
 
 export default class  Feed extends React.Component {
 	state = {
@@ -91,6 +92,30 @@ export default class  Feed extends React.Component {
 		})
 	}
 
+	recognizeItem = (id) => {
+		let elemWithId = -1;
+		elemWithId = this.state.notes.findIndex(x => x.id === id);
+		if ((elemWithId == undefined) || (elemWithId == -1)) return 0;
+
+		this.setState({
+			selectedItem : -1,
+			notes: update(this.state.notes, { [elemWithId]: { recognized: {$set: true} }})
+		})
+	}
+
+	toggleChart = (id) => {
+		let elemWithId = -1;
+		elemWithId = this.state.notes.findIndex(x => x.id === id);
+		if ((elemWithId == undefined) || (elemWithId == -1)) return 0;
+
+		console.log(id, this.state.notes[elemWithId].collapsed);
+
+		this.setState({
+			selectedItem : -1,
+			notes: update(this.state.notes, { [elemWithId]: { collapsed: {$set: !this.state.notes[elemWithId].collapsed} }})
+		})
+	}
+
     render() {
 		// travolta
 		const classnames = classNames({
@@ -102,15 +127,21 @@ export default class  Feed extends React.Component {
 				{
 					(this.state.notes) ?
 						this.state.notes.map((widget, i) => {
-							let object = null;
-							if (widget.type == "text") object = WidgetText; 
+							let Obj = null;
+							if (widget.type == "text") Obj = WidgetText; 
+							if (widget.type == "voice") Obj = WidgetVoice; 
+							if (widget.type == "chart") Obj = WidgetChart;
+							if (widget.type == "image") Obj = WidgetImage;
 
-							return <WidgetText 
+							console.log(widget.type);
+							return <Obj 
 								key={widget.id} 
 								data={widget} 
 								selected={i == this.state.selectedItem} 
 								showDots={this.checkSelection}
 								deleteItem={this.deleteItem}
+								recognizeItem={this.recognizeItem}
+								toggleChart={this.toggleChart}
 							 />
 						})
 					:

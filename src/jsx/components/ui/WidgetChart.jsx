@@ -5,12 +5,15 @@ import classNames from "classnames";
 import $ from "jquery";
 import { useState } from 'react'
 import moment from 'moment';
-import '../../../styles/ui/WidgetText.scss'
+import '../../../styles/ui/WidgetChart.scss'
+
 import DotsIcon from '../../../icons/dots-v.svg?react'
+import PickIcon from '../../../icons/expand-collapse.svg?react'
 import Bubble from './Bubble';
+import TradingViewWidget from './TradingViewWidget';
 import Timer from '../utils/Timer.jsx'
 
-export default class WidgetText extends React.Component {
+export default class WidgetChart extends React.Component {
 	container = React.createRef()
 	timer = null
 	state = {};
@@ -41,8 +44,15 @@ export default class WidgetText extends React.Component {
 		} 
 		$(this.container.current).css( { height : $(this.container.current).height() + 'px' } );
 		this.timer.start();
-
 	}
+	toggleChart = (e) => {
+		if (this.props.toggleChart) {
+			e.stopPropagation();
+			this.props.toggleChart(this.props.data.id);
+		} 
+		$(this.container.current).find(".at__widget-chart__value").slideToggle();
+	}
+
 	deleteItemHideCallback = () => {
 		$(this.container.current).css( { height : '0px' } );
 	}
@@ -53,7 +63,8 @@ export default class WidgetText extends React.Component {
 			"at__widget" : true,
 			"at__widget--selected" : this.props.selected,
 			"at__widget--deleted" : !this.props.data.display,
-			"at__widget-text" : true
+			"at__widget-chart--collapsed" : this.props.data.collapsed,
+			"at__widget-chart" : true
 		})
 		
 		return (
@@ -69,20 +80,9 @@ export default class WidgetText extends React.Component {
 					:
 						<></>
 				}
-				{
-					(this.props.data.title != "") ?
-						<div className="at__widget-text__title">{this.props.data.title}</div>
-					:
-						<></>
-				}
-				
-				{
-					(this.props.data.text != "") ?
-						<div className="at__widget-text__value">{this.props.data.text}</div>
-					:
-						<></>
-				}
-				<div className="at__widget-text__date">{moment(this.props.data.created).format("DD/MM/YYYY")}</div>
+				<div className="at__widget-chart__header"><PickIcon onClick={this.toggleChart} /><p>{this.props.data.ticker}</p> <p>{this.props.data.value}</p></div>
+				<div className="at__widget-chart__value"><TradingViewWidget /></div>
+				<div className="at__widget-chart__date">{moment(this.props.data.created).format("DD/MM/YYYY")}</div>
 			</div>
 		)
 	}

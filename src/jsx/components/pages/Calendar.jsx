@@ -10,7 +10,7 @@ import Feed from '../ui/Feed';
 
 
 export default (props) => (
-    <Profile {...props} payload={useParams()} history={useLocation()} navigate={useNavigate()} />
+    <Calendar {...props} payload={useParams()} history={useLocation()} navigate={useNavigate()} />
 );
 
 
@@ -23,13 +23,13 @@ const notesData = [
 		display : true,
 		canRemove : false,
 		padding : "120%",
-		url : "./assets/images/profile.png",
+		url : "./assets/images/calendar.png",
 		created : moment().format()
 	}
 ]
 
 
-class Profile extends React.Component {
+class Calendar extends React.Component {
 	constructor(props) {
 		super(props);
 		this.container = React.createRef();

@@ -5,6 +5,9 @@ import '../../styles/App.scss'
 import Home from './pages/Home';
 import Guide from './pages/Guide';
 import NotFound from './pages/NotFound';
+import Profile from './pages/Profile';
+import Calendar from './pages/Calendar';
+import Notes from './pages/Notes';
 
 // Store
 import { AppState } from '../stores'
@@ -27,12 +30,12 @@ const sitemap = [
 	{
 		id : 2,
 		path : "/notes",
-		element : NotFound,
+		element : Notes,
 		settings : {}
 	},
 	{
 		id : 3,
-		path : "/notes",
+		path : "/signin",
 		element : NotFound,
 		settings : {}
 	},
@@ -44,22 +47,16 @@ const sitemap = [
 	},
 	{
 		id : 5,
-		path : "/signin",
-		element : NotFound,
+		path : "/profile",
+		element : Profile,
 		settings : {}
 	},
 	{
 		id : 6,
-		path : "/profile",
-		element : NotFound,
-		settings : {}
-	},
-	{
-		id : 7,
 		path : "/calendar",
-		element : NotFound,
+		element : Calendar,
 		settings : {}
-	},
+	}
 ];
 
 const App = observer(() => {

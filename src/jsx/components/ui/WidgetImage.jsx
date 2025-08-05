@@ -5,12 +5,13 @@ import classNames from "classnames";
 import $ from "jquery";
 import { useState } from 'react'
 import moment from 'moment';
-import '../../../styles/ui/WidgetText.scss'
+import '../../../styles/ui/WidgetImage.scss'
+
 import DotsIcon from '../../../icons/dots-v.svg?react'
 import Bubble from './Bubble';
 import Timer from '../utils/Timer.jsx'
 
-export default class WidgetText extends React.Component {
+export default class WidgetImage extends React.Component {
 	container = React.createRef()
 	timer = null
 	state = {};
@@ -41,8 +42,15 @@ export default class WidgetText extends React.Component {
 		} 
 		$(this.container.current).css( { height : $(this.container.current).height() + 'px' } );
 		this.timer.start();
-
 	}
+	toggleChart = (e) => {
+		if (this.props.toggleChart) {
+			e.stopPropagation();
+			this.props.toggleChart(this.props.data.id);
+		} 
+		$(this.container.current).find(".at__widget-chart__value").slideToggle();
+	}
+
 	deleteItemHideCallback = () => {
 		$(this.container.current).css( { height : '0px' } );
 	}
@@ -53,7 +61,8 @@ export default class WidgetText extends React.Component {
 			"at__widget" : true,
 			"at__widget--selected" : this.props.selected,
 			"at__widget--deleted" : !this.props.data.display,
-			"at__widget-text" : true
+			"at__widget-image--fullsize" :  !this.props.data.canRemove,
+			"at__widget-image" : true
 		})
 		
 		return (
@@ -69,20 +78,14 @@ export default class WidgetText extends React.Component {
 					:
 						<></>
 				}
+				<div className="at__widget-image__header"></div>
+				<div className="at__widget-image__value"  style={{ paddingTop : this.props.data.padding }} ><img src={this.props.data.url}/></div>
 				{
-					(this.props.data.title != "") ?
-						<div className="at__widget-text__title">{this.props.data.title}</div>
+					(this.props.data.canRemove) ?
+						<div className="at__widget-image__date">{moment(this.props.data.created).format("DD/MM/YYYY")}</div>
 					:
 						<></>
 				}
-				
-				{
-					(this.props.data.text != "") ?
-						<div className="at__widget-text__value">{this.props.data.text}</div>
-					:
-						<></>
-				}
-				<div className="at__widget-text__date">{moment(this.props.data.created).format("DD/MM/YYYY")}</div>
 			</div>
 		)
 	}

@@ -1,4 +1,4 @@
-.at__widget-text {
+.at__widget-voice {
 	background: linear-gradient(0deg, rgba(245,250,255,1.0) 0%, rgba(253,255,255,1.0) 100%);
 	box-shadow: 0px 2px 4px rgba(0,0,100,0.05);
 	border-radius: 20px;
@@ -16,18 +16,20 @@
 		border: 0;
 	}
 }
-.at__widget-text__title {
+.at__widget-voice__title {
+	display: none;
 	.at__widget--deleted & {
 		opacity: 0.0;
 	}
 }
-.at__widget-text__value {
+.at__widget-voice__value {
 	font-size: 1.0em;
+	display: none;
 	.at__widget--deleted & {
 		opacity: 0.0;
 	}
 }
-.at__widget-text__date {
+.at__widget-voice__date {
 	margin-top: 4px;
 	font-size: 0.8em;
 	opacity: 0.5;
@@ -35,3 +37,15 @@
 		opacity: 0.0;
 	}
 }
+
+.at__widget-voice__mock {
+	width: calc(100% - 40px);
+	opacity: 0.9;
+	svg {
+		color: #0ff;
+	}
+	.at__widget--deleted & {
+		opacity: 0.0;
+	}
+}
+    

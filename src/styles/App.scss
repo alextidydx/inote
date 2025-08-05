@@ -25,7 +25,7 @@ body, at__body {
 		position: absolute;
 		opacity: 1.0;
 		transition: 1.2s linear opacity;
-		background: linear-gradient(0deg, rgba(0,0,200,0.02) 0%, rgba(0,0,200,0) 400px);
+		//background: linear-gradient(0deg, rgba(0,0,200,0.02) 0%, rgba(0,0,200,0) 400px);
 		pointer-events: none;
 	}
 	&::before {

@@ -9,6 +9,7 @@
 	opacity: 0.0;
 	pointer-events: none;
 	color: #eef;
+	z-index: 12;
 	.at__widget--bottom & {
 		bottom: auto;
 		top: 0px;
@@ -34,8 +35,13 @@
 		//border-style: solid;
 		//border-color: transparent transparent transparent #fff;
 	}
+	div {
+		margin: 8px;
+	}
 }
+.at__bubble-normal {
 
+}
 .at__bubble-delete{
 	color: #ffaa9f;
 	transition: color 200ms ease;
