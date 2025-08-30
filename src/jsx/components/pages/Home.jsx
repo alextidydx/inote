@@ -4,7 +4,7 @@ import { useParams, useLocation, Link } from "react-router-dom"
 import $ from "jquery";
 
 import { useState } from 'react'
-import '../../../styles/ui/Home.scss'
+import '../../../styles/pages/home.scss'
 
 import AtBoard from "../ui/AtBoard"
 

@@ -16,63 +16,51 @@ import loader from '../../../images/loader.svg'
 import loaderBK from '../../../images/loader-bk.svg'
 
 
-import { useCallback } from 'react';
 import ReactFlow, {
-  MiniMap,
-  Controls,
-  Background,
-  useNodesState,
-  useEdgesState,
-  addEdge,
+	addEdge,
+	applyNodeChanges,
+	applyEdgeChanges,
+	Background,
+	Position,
+	Controls,
 } from 'reactflow';
-// state
+// custom nodes
+import AtCard from './AtCard';
 
-
-
-
-
-
-
-
-const initialNodes = [
-	{ id: '1', position: { x: 400, y: 400 }, data: { label: '1' } },
-	{ id: '2', position: { x: 800, y: 400 }, data: { label: '2' } },
-];
-
-const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
-
-function Flow() {
-	const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-	const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-
-	const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
-
-	return (
-	<ReactFlow
-		nodes={nodes}
-		edges={edges}
-		onNodesChange={onNodesChange}
-		onEdgesChange={onEdgesChange}
-		onConnect={onConnect}
-	>
-		<Controls />
-		<Background />
-	</ReactFlow>
-	);
-}
-
-
+const nodeTypes = {
+	simepleCard: AtCard,
+};
 
 
 
 
 export default class AtBoard extends React.Component {
-	state = {}
+	state = {
+		nodes: [
+			{ 
+				id: '1', 
+				position: { x: 400, y: 400 }, 
+				data: { label: '1' },
+				type: 'simepleCard'
+			},
+			{ 
+				id: '2', 
+				position: { x: 800, y: 400 }, 
+				data: { label: '2' },
+				sourcePosition: Position.Right,
+				targetPosition: Position.Left
+			},
+		],
+		edges: [
+			{ id: 'e1-2', source: '1', target: '2', type: 'step' }
+		]
+    }
 	container = React.createRef()
 
 	constructor(props) {
 		super(props);
 		$(window).resize(this.onResize);
+
 	}
 	onResize = (e) => {}
 
@@ -87,11 +75,55 @@ export default class AtBoard extends React.Component {
 		this.setImgOnLoad();
 	}
 
-	
+	// Handle node changes
+	onNodesChange = (changes) =>  {
+		this.setState((prevState) => ({
+			nodes: applyNodeChanges(changes, prevState.nodes),
+		}));
+	}
+
+	// Handle edge changes
+	onEdgesChange = (changes) =>  {
+		this.setState((prevState) => ({
+			edges: applyEdgeChanges(changes, prevState.edges),
+		}));
+	}
+
+	// Handle new connections
+	onConnect = (params) =>  {
+		this.setState((prevState) => ({
+			edges: addEdge(params, prevState.edges),
+		}));
+	}
+
+	// Handle node click
+	onNodeClick = (event, node) => {
+	console.log('Node clicked:', node);
+		// Update node label on click
+		this.setState((prevState) => ({
+			nodes: prevState.nodes.map((n) =>
+				n.id === node.id ? { ...n, data: { ...n.data, label: `${n.data.label} (Clicked)` } } : n
+			),
+		}));
+	}
+
 	render() {
+		const { nodes, edges } = this.state;
 		return (
 			<div className="at__board" ref={this.container} >
-				<Flow />
+				<ReactFlow
+					nodes={nodes}
+					edges={edges}
+					nodeTypes={nodeTypes}
+					onNodesChange={this.onNodesChange}
+					onEdgesChange={this.onEdgesChange}
+					onConnect={this.onConnect}
+					onNodeClick={this.onNodeClick}
+					fitView
+				>
+					<Background />
+					<Controls />
+				</ReactFlow>
 			</div>
 		)
 	}
