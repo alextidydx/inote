@@ -25,7 +25,8 @@ export default class AtCard extends React.Component {
 	state = {
 		loading : false,
 		selected : false,
-		overflow :false
+		overflow : false,
+		resizing : false
 	}
 
 	constructor(props) {
@@ -81,6 +82,15 @@ export default class AtCard extends React.Component {
 		return (this.parentNode.outerHeight() + delta);
 	}
 
+	onResizeEnd = (e) => {
+		this.setState({ resizing : false });
+		this.parentNode.css( {transition : ""} );
+	}
+
+	onResizeStart = (e) => {
+		this.setState({ resizing : true });
+		this.parentNode.css( {transition : "none"}  );
+	}
 	
 	render() {
 		
@@ -88,7 +98,8 @@ export default class AtCard extends React.Component {
 		const classnames = classNames({
 			"at__card" : true,
 			"at__card--active" : this.state.loaded,
-			"at__card--overflow" : this.state.overflow
+			"at__card--overflow" : this.state.overflow,
+			"at__card--resizing" : this.state.resizing
 		})
 
 		return (
@@ -102,7 +113,7 @@ export default class AtCard extends React.Component {
 					<div className="at__card__content-overflow" onClick={this.expand}>...</div>
 				</div>
 				<div className="at__card__date">{ this.props.data.date }</div>
-				<NodeResizer minWidth={100} minHeight={30} onResize={this.onResize}  />
+				<NodeResizer minWidth={100} minHeight={30} onResize={this.onResize} onResizeStart={this.onResizeStart} onResizeEnd={this.onResizeEnd} />
 				<Handle type="target" position="left" />
 				<Handle type="source" position="right" />
 			</div>

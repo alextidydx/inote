@@ -2,6 +2,10 @@
 .at__card {
 	display: flex;
 	height: 100%;
+	transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+	&.at__card--resizing {
+		transition: none;
+	}
 }
 
 .at__card__content-container {
