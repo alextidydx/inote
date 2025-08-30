@@ -6,7 +6,7 @@ import $ from "jquery";
 import { useState } from 'react'
 import '../../../styles/ui/Home.scss'
 
-
+import AtBoard from "../ui/AtBoard"
 
 export default (props) => (
     <Home {...props} payload={useParams()} history={useLocation()} />
@@ -83,7 +83,7 @@ class Home extends React.Component {
 						<img src="/assets/images/menu-top-right.png"  />
 					</div>
 					<div className="at__home__diagram" >
-
+						<AtBoard />
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,18 @@
 .at__board {
 	display: flex;
 	background-color: #f00;
-}
+	width: 100%;
+	height: 100%;
+	background-color: #F3F4FF;
 
+	.react-flow__node {
+		padding: 18px;
+		border-radius: 16px;
+		background: #FFF;
+		box-shadow: 0 1.6px 6.401px 0 rgba(38, 54, 97, 0.15);
+		border: 0;
+		min-width: 288px;
+		min-height: 200px;
+	}
+
+}
