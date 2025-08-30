@@ -70,7 +70,7 @@ export default class AtCard extends React.Component {
 
 	expand = (e) => {
 		this.parentNode.css({ height : this.getExpandedHight() + "px" });
-		this.onResize();
+		this.setState({ overflow : false });
 	}
 
 	getExpandedHight = (e) => {
@@ -78,7 +78,7 @@ export default class AtCard extends React.Component {
 		let currentDOM = $(this.container.current);
 		let descDOM = currentDOM.find(".at__card__content");
 		let textDOM = descDOM.find("p");
-		let delta = textDOM.outerHeight() - descDOM.outerHeight() + 23;
+		let delta = textDOM.outerHeight() - descDOM.outerHeight() + 24;
 		return (this.parentNode.outerHeight() + delta);
 	}
 
