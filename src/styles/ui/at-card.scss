@@ -2,10 +2,11 @@
 .at__card {
 	display: flex;
 	height: 100%;
-	transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+
 	&.at__card--resizing {
 		transition: none;
 	}
+
 }
 
 .at__card__content-container {
@@ -76,7 +77,7 @@
 
 .at__card__content-overflow {
 	position: absolute;
-	bottom: 0;
+	bottom: -22px;
 	left: 50%;
 	padding: 0px 10px 8px 10px;
 	border-radius: 10px;
@@ -100,6 +101,10 @@
 	font-size: 10px;
 }
 
+.at__card__content-tags {
+	padding: 0 0 14px 0;
+}
+
 .react-flow__resize-control.handle {
 	background-color: transparent;
 }
@@ -108,8 +113,10 @@
 	background-color: none;
 	&.bottom.right {
 		display: flex;
-		//pointer-events: none;
+		pointer-events: none;
 		cursor: pointer;
+		border: 0;
+		opacity: 1.0;
 		&:hover {
 			&:before {
 				opacity: 0.5;

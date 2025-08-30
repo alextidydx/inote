@@ -10,6 +10,8 @@ import '../../../styles/ui/at-card.scss'
 import loader from '../../../images/loader.svg'
 import loaderBK from '../../../images/loader-bk.svg'
 
+import AtTags from './AtTags';
+
 
 // state
 import ReactFlow, {
@@ -37,7 +39,8 @@ export default class AtCard extends React.Component {
 		this.parentNode = $(this.container.current).parent();
 		this.onResize();
 	}
-	componentDidUpdate() {}
+	componentDidUpdate() {
+	}
 
 	onResize = (e) => {
 		// Trunc
@@ -52,7 +55,7 @@ export default class AtCard extends React.Component {
 
 		if (this.state.overflow != isCurrentOverflow) this.setState({ overflow : isCurrentOverflow });
 
-
+		this.parentNode.css({ "max-height" :  (this.getExpandedHight()-0.2) + "px" });
 
 		return;
 		/*
@@ -78,13 +81,15 @@ export default class AtCard extends React.Component {
 		let currentDOM = $(this.container.current);
 		let descDOM = currentDOM.find(".at__card__content");
 		let textDOM = descDOM.find("p");
-		let delta = textDOM.outerHeight() - descDOM.outerHeight() + 24;
+		let delta = textDOM.outerHeight() - descDOM.outerHeight() + 14;
 		return (this.parentNode.outerHeight() + delta);
 	}
 
 	onResizeEnd = (e) => {
 		this.setState({ resizing : false });
 		this.parentNode.css( {transition : ""} );
+		this.parentNode.css({ "max-height" :  this.getExpandedHight() + "px" });
+
 	}
 
 	onResizeStart = (e) => {
@@ -99,7 +104,8 @@ export default class AtCard extends React.Component {
 			"at__card" : true,
 			"at__card--active" : this.state.loaded,
 			"at__card--overflow" : this.state.overflow,
-			"at__card--resizing" : this.state.resizing
+			"at__card--resizing" : this.state.resizing,
+			"at__card--dragging" : this.props.dragging
 		})
 
 		return (
@@ -111,6 +117,7 @@ export default class AtCard extends React.Component {
 					</div>
 					<div className="at__card__content"><p>{ this.props.data.description }</p></div>
 					<div className="at__card__content-overflow" onClick={this.expand}>...</div>
+					<div className="at__card__content-tags"><AtTags tags={this.props.data.tags} /></div>
 				</div>
 				<div className="at__card__date">{ this.props.data.date }</div>
 				<NodeResizer minWidth={100} minHeight={30} onResize={this.onResize} onResizeStart={this.onResizeStart} onResizeEnd={this.onResizeEnd} />

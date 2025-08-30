@@ -16,9 +16,11 @@
 		min-width: 288px;
 		max-width: 400px;
 		max-height: 512px;
-		min-height: 90px;
-		transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
-
+		min-height: 128px;
+		transition: width 0.3s ease-in-out, height 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+		&.dragging {
+			box-shadow: 0 1.6px 16.401px 0 rgba(38, 54, 97, 0.15);
+		}
 	}
 	.react-flow__viewport {
 		//transition: transform 0.05s linear;

@@ -1,0 +1,22 @@
+@import "../vars.scss";
+.at__tags {
+	display: flex;
+	height: 100%;
+}
+
+.at__tag {
+	display: flex;
+	background-color: $tag-bk;
+	border-radius: 12px;
+	padding: 4px 6px;
+	font-size: 10px;
+	position: relative;
+	img {
+		margin-left:4px;
+		width: 8px;
+		height: 8px;
+		position: relative;
+		top: 2px;
+		cursor: pointer;
+	}
+}
