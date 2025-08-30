@@ -1,3 +1,27 @@
+@import "../vars.scss";
 .at__card {
+	display: flex;
+}
+
+.at__card__content-container {
+	display: flex;
+	flex-direction: column;
+}
+.at__card__label {
+	display: flex;
+	flex-direction: row;
+}
+.at__card__ico {
+	display: flex;
+}
+.at__card__title {
+	display: flex;
+	color: $text-color;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 22px;
+}
+.at__card__content {
 	display: flex;
 }

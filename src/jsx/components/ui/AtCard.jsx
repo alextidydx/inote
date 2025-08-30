@@ -13,7 +13,8 @@ import loaderBK from '../../../images/loader-bk.svg'
 
 // state
 import ReactFlow, {
-	Handle
+	Handle,
+	NodeResizer
 } from 'reactflow';
 
 
@@ -27,6 +28,7 @@ export default class AtCard extends React.Component {
 
 	constructor(props) {
 		super(props);
+		console.log(props);
 	}
 	componentDidMount() {}
 	componentDidUpdate() {}
@@ -50,8 +52,17 @@ export default class AtCard extends React.Component {
 		})
 
 		return (
-			<div className={classnames} ref={this.container}>
-				cardssssss
+			<div className={classnames} ref={this.container} onClick={this.props.data.click}>
+				<div className="at__card__content-container" >
+					<div className="at__card__label">
+						<div className="at__card__ico">ICO</div>
+						<div className="at__card__title">Title</div>
+					</div>
+					<div className="at__card__content">
+						lalalalala
+					</div>
+				</div>
+				<NodeResizer minWidth={100} minHeight={30} />
 				<Handle type="target" position="left" />
 				<Handle type="source" position="right" />
 			</div>

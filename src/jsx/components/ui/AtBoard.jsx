@@ -40,7 +40,7 @@ export default class AtBoard extends React.Component {
 			{ 
 				id: '1', 
 				position: { x: 400, y: 400 }, 
-				data: { label: '1' },
+				data: { click : () => { console.log("click");} },
 				type: 'simepleCard'
 			},
 			{ 
