@@ -6,7 +6,8 @@ import $ from "jquery";
 import { useState } from 'react'
 import '../../../styles/ui/at-tags.scss'
 
-import closeIco from '../../../images/close.svg'
+import CloseIco from '../../../images/close.svg?react'
+
 
 export default class AtTags extends React.Component {
 	container = React.createRef()
@@ -31,7 +32,7 @@ export default class AtTags extends React.Component {
 			<div className={classnames} ref={this.container} >
 				{
 					this.props.tags.map((tag, i) => {
-						return <div className="at__tag" key={i} >{tag}<img src={closeIco} className="at__at-work__loader-loader-bk" /></div>
+						return <div className="at__tag" key={i} >{tag}<CloseIco className="at__at-work__loader-loader-bk" /></div>
 					})
 				}
 			</div>

@@ -12,6 +12,8 @@ import loaderBK from '../../../images/loader-bk.svg'
 
 import AtTags from './AtTags';
 
+import PenIcon from '../../../images/note-pen.svg?react'
+
 
 // state
 import ReactFlow, {
@@ -112,7 +114,7 @@ export default class AtCard extends React.Component {
 			<div className={classnames} ref={this.container} onClick={this.props.data.click}>
 				<div className="at__card__content-container" >
 					<div className="at__card__label">
-						<div className="at__card__ico">ICO</div>
+						<div className="at__card__ico"><PenIcon /></div>
 						<div className="at__card__title">{ this.props.data.title }</div>
 					</div>
 					<div className="at__card__content"><p>{ this.props.data.description }</p></div>

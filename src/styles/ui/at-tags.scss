@@ -11,12 +11,18 @@
 	padding: 4px 6px;
 	font-size: 10px;
 	position: relative;
-	img {
+	margin: 0 4px 0 0 ;
+	svg {
 		margin-left:4px;
 		width: 8px;
 		height: 8px;
 		position: relative;
 		top: 2px;
 		cursor: pointer;
+		opacity: 0.3;
+		transition: opacity 0.3s ease-in-out;
+		&:hover {
+			opacity: 0.8;
+		}
 	}
 }

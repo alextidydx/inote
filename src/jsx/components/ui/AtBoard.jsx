@@ -16,6 +16,8 @@ import loader from '../../../images/loader.svg'
 import loaderBK from '../../../images/loader-bk.svg'
 
 
+
+
 import ReactFlow, {
 	addEdge,
 	applyNodeChanges,
@@ -39,7 +41,7 @@ export default class AtBoard extends React.Component {
 		nodes: [
 			{ 
 				id: '1', 
-				position: { x: 400, y: 400 }, 
+				position: { x: 280, y: 400 }, 
 				data: { 
 					click : () => { console.log("click");},
 					title : "Node Example",
@@ -56,7 +58,7 @@ export default class AtBoard extends React.Component {
 			},
 			{ 
 				id: '2', 
-				position: { x: 800, y: 400 }, 
+				position: { x: 800, y: 444 }, 
 				data: { label: '2' },
 				sourcePosition: Position.Right,
 				targetPosition: Position.Left
@@ -64,7 +66,8 @@ export default class AtBoard extends React.Component {
 		],
 		edges: [
 			{ id: 'e1-2', source: '1', target: '2', type: 'step' }
-		]
+		],
+		selectedNodes: []
     }
 	container = React.createRef()
 
@@ -109,13 +112,20 @@ export default class AtBoard extends React.Component {
 
 	// Handle node click
 	onNodeClick = (event, node) => {
-	console.log('Node clicked:', node);
+		console.log('Node clicked:', node);
 		// Update node label on click
 		this.setState((prevState) => ({
 			nodes: prevState.nodes.map((n) =>
 				n.id === node.id ? { ...n, data: { ...n.data, label: `${n.data.label} (Clicked)` } } : n
 			),
 		}));
+	}
+
+	onSelectionChange({ nodes }) {
+		console.log('Selected nodes:', nodes.map((node) => node.id));
+		this.setState({
+			selectedNodes: nodes.map((node) => node.id)
+		});
 	}
 
 	render() {
@@ -131,6 +141,10 @@ export default class AtBoard extends React.Component {
 					onConnect={this.onConnect}
 					onNodeClick={this.onNodeClick}
 					defaultEdgeOptions={{ type: 'step' }}
+					minZoom={0.2}
+					maxZoom={1}
+					selectionOnDrag={true} // Enable rectangle selection
+          			selectionKeyCode={'Shift'}
 					fitView
 				>
 					<Background />

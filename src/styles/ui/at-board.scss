@@ -1,3 +1,4 @@
+@import "../vars.scss";
 .at__board {
 	display: flex;
 	background-color: #f00;
@@ -18,12 +19,21 @@
 		max-height: 512px;
 		min-height: 126px;
 		transition: width 0.3s ease-in-out, height 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+		box-sizing: border-box;
+		border: solid 1px transparent;
 		&.dragging {
 			box-shadow: 0 1.6px 16.401px 0 rgba(38, 54, 97, 0.15);
+		}
+		&.selected {
+			border: solid 1px $accent-color;
 		}
 	}
 	.react-flow__viewport {
 		//transition: transform 0.05s linear;
+	}
+	.react-flow__nodesselection-rect {
+		border-radius: 10px;
+		visibility: hidden;
 	}
 	/*
 	react-flow__handle 
