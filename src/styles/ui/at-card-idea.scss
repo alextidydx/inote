@@ -31,6 +31,9 @@
 
 .at__card-idea {
 	background-color: none;
+	.react-flow__handle-right {
+		right: -21px;
+	}
 }
 
 .at__card-idea__bk-card-cont {
@@ -41,6 +44,7 @@
 	left: -1px;
 	bottom: 0px;
 	position: absolute;
+	pointer-events: none;
 	.at__card-idea__bk-card {
 		&:nth-of-type(3) {
 			top: 0px;
