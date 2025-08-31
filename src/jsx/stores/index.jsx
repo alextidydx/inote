@@ -150,20 +150,14 @@ class appState {
 		return boardData;
 	}
 
-	getNodeWrapperWithObj(wrapperId) {
-		let nodeWrapper = this.nodes.findIndex(node => node.id === nodeId);
-
-		let node = this.nodes.findIndex(node => node.id === nodeId);
-
-	}
 
 	// EDGES ////////////////////////////////////////////////////
-	/*
-	addEdge(data) {
+	
+	addEdge(boardId, data) {
 		console.log("-addEdge", data);
 		//check if we have this edge
 		let newId = "e" + data.source + "-" + data.target;
-		let haveEdge = this.edges.some(edge => edge.id === newId);
+		let haveEdge = this.edges.some(edge => (edge.id === newId) && (edge.board == boardId ));
 
 		if (haveEdge) return 0;
 
@@ -172,13 +166,14 @@ class appState {
 			id: newId, 
 			source: data.source, 
 			target: data.target, 
-			type: 'step'
+			type: 'step',
+			board: boardId
 		}
 		//immutable
 		this.edges = [...this.edges, newEdge];
 		return 1;
 	}
-	removeEdges(data) {
+	removeEdges(boardId, data) {
 		//let haveEdge = this.edges.some(edge => edge.id === data[0].id);
 		//if (!haveEdge) return 0;
 		//immutable
@@ -190,13 +185,13 @@ class appState {
 
 
 	// NODES ////////////////////////////////////////////////////
-	addNode(data) {
+	addNode(boardId, data) {
 		console.log("-addNodeByID", data);
 	}
-	changeNodesPositions(positionUpdates) {
-		let nodes = [...this.nodes]; // Create new array
+	changeNodesPositions(boardId, positionUpdates) {
+		let nodes = [...this.nodeWrappers]; // Create new array
 		positionUpdates.forEach(update => {
-			const index = nodes.findIndex(node => node.id === update.id);
+			const index = nodes.findIndex(node => (node.id === update.id));
 			if (index !== -1) {
 				nodes[index].position.x = update.position.x;
 				nodes[index].position.y = update.position.y;
@@ -206,11 +201,13 @@ class appState {
 		//this.edges = newEdges; // Update observable
 
 	}
-	removeNodes(data) {
+	removeNodes(boardId, data) {
 		const nodeIdsToRemove = data.map(item => item.id);
-		this.nodes = this.nodes.filter(edge => !nodeIdsToRemove.includes(edge.id));
+		this.nodeWrappers = this.nodeWrappers.filter(nodeW => !nodeIdsToRemove.includes(nodeW.id));
 	}
-	*/
+	
+
+	// TODO delete a node if there're no nodeWrappers
 
 	
 }

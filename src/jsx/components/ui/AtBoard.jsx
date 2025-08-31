@@ -65,6 +65,8 @@ export default class AtBoard extends React.Component {
 		console.log(this.state.nodes);
 		console.log(this.state.edges);
 
+		console.log(this.props.board);
+
 		// animation timer
 		this.aTimer = new Timer(30, 30);
 		this.aTimer.progress = this.focusOnNodeProcess;
@@ -79,6 +81,7 @@ export default class AtBoard extends React.Component {
 	// Handle node changes
 	onNodesChange = (changes) =>  {
 		//console.log("onNodesChange", changes);
+		let boardId = this.state.board.id;
 		this.setState((prevState) => ({
 			nodes: applyNodeChanges(changes, prevState.nodes),
 		}));
@@ -96,7 +99,7 @@ export default class AtBoard extends React.Component {
 		*/
 		let toDelete = changes.filter(node => node.type == "remove");
 		if (toDelete.length > 0) {
-			this.appData.removeNodes(toDelete);
+			this.appData.removeNodes(boardId, toDelete);
 		}
 
 		/* Position
@@ -116,7 +119,7 @@ export default class AtBoard extends React.Component {
 		let toMoveIds = changes.map(item => item.id);
 		let toMove = this.state.nodes.filter(node => toMoveIds.includes(node.id));
 		if (toMove.length > 0) {
-			//this.appData.changeNodesPositions(toMove);
+			this.appData.changeNodesPositions(boardId, toMove);
 		}
 
 		
@@ -125,6 +128,7 @@ export default class AtBoard extends React.Component {
 	// Handle edge changes
 	onEdgesChange = (changes) =>  {
 		//console.log("onEdgesChange", changes);
+		let boardId = this.state.board.id;
 		this.setState((prevState) => ({
 			edges: applyEdgeChanges(changes, prevState.edges),
 		}));
@@ -144,7 +148,7 @@ export default class AtBoard extends React.Component {
 		let toDelete = changes.filter(edge => edge.type == "remove");
 		//console.log("Delete edges", toDelete);
 		if (toDelete.length > 0) {
-			this.appData.removeEdges(toDelete);
+			this.appData.removeEdges(boardId, toDelete);
 		}
 
 	}
@@ -152,6 +156,7 @@ export default class AtBoard extends React.Component {
 	// Handle new connections
 	onConnect = (params) =>  {
 		//console.log("onConnect", params);
+		let boardId = this.state.board.id;
 		this.setState((prevState) => ({
 			edges: addEdge(params, prevState.edges),
 		}));
@@ -167,7 +172,7 @@ export default class AtBoard extends React.Component {
 		*/
 
 		// check if we already have the same edge
-		this.appData.addEdge(params);
+		this.appData.addEdge(boardId, params);
 	}
 
 	// Handle node click
