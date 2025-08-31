@@ -44,74 +44,7 @@ const nodeTypes = {
 export default class AtBoard extends React.Component {
 	state = {
 		board : this.props.board,
-		nodes : [
-    {
-        "id": "4",
-        "alias": 1,
-        "position": {
-            "x": 280,
-            "y": 400
-        },
-        "board": 0,
-        "nid": 1,
-        "data": {
-            "title": "Simple Note 1",
-            "description": "Lorem Ipsum🙂 is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap ",
-            "date": "1d ago",
-            "tags": [
-                "Commerce",
-                "Forex"
-            ]
-        },
-        "type": "simepleCard",
-        "className": "custom-node",
-        "sourcePosition": "right",
-        "targetPosition": "left"
-    },
-    {
-        "id": "5",
-        "alias": 2,
-        "position": {
-            "x": 800,
-            "y": 545
-        },
-        "board": 0,
-        "nid": 2,
-        "data": {
-            "title": "Idea Node",
-            "description": "Lorem Ipsum is simply dummy text of",
-            "date": "2d ago",
-            "tags": [
-                "Idea"
-            ]
-        },
-        "type": "ideaCard",
-        "className": "at__node-idea",
-        "sourcePosition": "right",
-        "targetPosition": "left"
-    },
-    {
-        "id": "6",
-        "alias": 3,
-        "position": {
-            "x": 600,
-            "y": 745
-        },
-        "board": 0,
-        "nid": 3,
-        "data": {
-            "title": "Simple Note 2",
-            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
-            "date": "3d ago",
-            "tags": [
-                "Commerce"
-            ]
-        },
-        "type": "simepleCard",
-        "sourcePosition": "right",
-        "targetPosition": "left"
-    }
-],
+		nodes : this.props.nodes,
 		edges : this.props.edges,
 		selectedNodes: [],
 		smoothZoom : false,

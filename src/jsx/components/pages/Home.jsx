@@ -75,6 +75,9 @@ class Home extends React.Component {
     	let board = this.props.AppState.getBoardById(0);
     	let nodes = board.nodes;
     	let edges = board.edges;
+
+    	console.log(board)
+
 		return (
 		<>
 			<div className="at__home" ref={this.container}>
