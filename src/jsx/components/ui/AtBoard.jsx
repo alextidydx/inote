@@ -54,11 +54,12 @@ export default class AtBoard extends React.Component {
 				 },
 				type: 'simepleCard',
 				sourcePosition: Position.Right,
-				targetPosition: Position.Left
+				targetPosition: Position.Left,
+				//selectable: false
 			},
 			{ 
 				id: '2', 
-				position: { x: 800, y: 444 }, 
+				position: { x: 800, y: 445 }, 
 				data: { label: '2' },
 				sourcePosition: Position.Right,
 				targetPosition: Position.Left
@@ -141,10 +142,12 @@ export default class AtBoard extends React.Component {
 					onConnect={this.onConnect}
 					onNodeClick={this.onNodeClick}
 					defaultEdgeOptions={{ type: 'step' }}
-					minZoom={0.2}
-					maxZoom={1}
+					minZoom={0.5}
+					maxZoom={1.3}
 					selectionOnDrag={true} // Enable rectangle selection
-          			selectionKeyCode={'Shift'}
+          			deleteKeyCode={'Delete'}
+          			panOnDrag={[1]}
+          			nodesSelectable={false}
 					fitView
 				>
 					<Background />

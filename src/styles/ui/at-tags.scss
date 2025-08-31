@@ -8,16 +8,16 @@
 	display: flex;
 	background-color: $tag-bk;
 	border-radius: 12px;
-	padding: 4px 6px;
+	padding: 4px 8px;
 	font-size: 10px;
 	position: relative;
 	margin: 0 4px 0 0 ;
 	svg {
 		margin-left:4px;
-		width: 8px;
-		height: 8px;
+		width: 10px;
+		height: 10px;
 		position: relative;
-		top: 2px;
+		top: 1px;
 		cursor: pointer;
 		opacity: 0.3;
 		transition: opacity 0.3s ease-in-out;
