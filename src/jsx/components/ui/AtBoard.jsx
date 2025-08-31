@@ -38,52 +38,28 @@ const nodeTypes = {
 
 export default class AtBoard extends React.Component {
 	state = {
-		nodes: [
-			{ 
-				id: '1', 
-				position: { x: 280, y: 400 }, 
-				data: { 
-					click : () => { console.log("click");},
-					title : "Node Example",
-					description : "Lorem Ipsum🙂 is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap ",
-					date : "1d ago",
-					tags : [
-						"Commerce",
-						"Forex"
-					]
-				 },
-				type: 'simepleCard',
-				sourcePosition: Position.Right,
-				targetPosition: Position.Left,
-				//selectable: false
-			},
-			{ 
-				id: '2', 
-				position: { x: 800, y: 445 }, 
-				data: { label: '2' },
-				sourcePosition: Position.Right,
-				targetPosition: Position.Left
-			},
-		],
-		edges: [
-			{ id: 'e1-2', source: '1', target: '2', type: 'step' }
-		],
+		nodes : this.props.AppState.nodes,
+		edges : this.props.AppState.edges,
 		selectedNodes: []
     }
 	container = React.createRef()
+	appData = null
 
 	constructor(props) {
 		super(props);
 		$(window).resize(this.onResize);
-
+		this.appData = this.props.AppState;
+		console.log("board", this.appData);
 	}
 	onResize = (e) => {}
 
 	componentDidMount() {
 		this.onResize();
-	}
-	componentDidUpdate() {}
 
+	}
+	componentDidUpdate() {
+		console.log("componentDidUpdate");
+	}
 	setHTMLData = (_data) => {
 		$(this.htmlContainer.current).html(_data);
 		$(this.htmlContainer.current).scrollTop(0);
@@ -92,6 +68,7 @@ export default class AtBoard extends React.Component {
 
 	// Handle node changes
 	onNodesChange = (changes) =>  {
+		//console.log("onNodesChange", changes);
 		this.setState((prevState) => ({
 			nodes: applyNodeChanges(changes, prevState.nodes),
 		}));
@@ -99,16 +76,43 @@ export default class AtBoard extends React.Component {
 
 	// Handle edge changes
 	onEdgesChange = (changes) =>  {
+		//console.log("onEdgesChange", changes);
 		this.setState((prevState) => ({
 			edges: applyEdgeChanges(changes, prevState.edges),
 		}));
+
+		/* Delete
+		[
+		    {
+		        "id": "e1-2",
+		        "type": "remove"
+		    }
+		]
+		*/
+		if (changes[0].type == "remove") {
+			this.appData.removeEdge(changes);
+		}
 	}
 
 	// Handle new connections
 	onConnect = (params) =>  {
+		//console.log("onConnect", params);
 		this.setState((prevState) => ({
 			edges: addEdge(params, prevState.edges),
 		}));
+
+		/*
+		{
+		    "type": "step",
+		    "source": "1",
+		    "sourceHandle": null,
+		    "target": "2",
+		    "targetHandle": null
+		}
+		*/
+
+		// check if we already have the same edge
+		this.appData.addEdge(params);
 	}
 
 	// Handle node click
@@ -147,7 +151,6 @@ export default class AtBoard extends React.Component {
 					selectionOnDrag={true} // Enable rectangle selection
           			deleteKeyCode={'Delete'}
           			panOnDrag={[1]}
-          			nodesSelectable={false}
 					fitView
 				>
 					<Background />

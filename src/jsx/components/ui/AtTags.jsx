@@ -15,7 +15,6 @@ export default class AtTags extends React.Component {
 
 	constructor(props) {
 		super(props);
-		console.log(props);
 	}
 	componentDidMount() {}
 	componentDidUpdate() {}
@@ -32,7 +31,7 @@ export default class AtTags extends React.Component {
 			<div className={classnames} ref={this.container} >
 				{
 					this.props.tags.map((tag, i) => {
-						return <div className="at__tag" key={i} >{tag}<CloseIco className="at__at-work__loader-loader-bk" /></div>
+						return <div className="at__tag" key={i} >{tag}<CloseIco className="at__" /></div>
 					})
 				}
 			</div>

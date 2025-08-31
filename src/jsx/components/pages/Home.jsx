@@ -28,6 +28,7 @@ class Home extends React.Component {
 	constructor(props) {
 		super(props);
 		this.container = React.createRef();
+		this.printVars();
 	}
 
 	componentDidMount() {}
@@ -41,10 +42,11 @@ class Home extends React.Component {
 
 
 	printVars = () => {
-		return 0;
-		console.log("Settings", this.props.settings);
-		console.log("Payload", this.props.payload);
-		console.log("Location", this.props.history);		
+		console.log(this.props.AppState.edges.length);		
+		console.log(this.props.AppState.nodes.length);	
+		//console.log("Settings", this.props.settings);
+		//console.log("Payload", this.props.payload);
+		//console.log("Location", this.props.history);		
 	}
 
 	// works functionality
@@ -83,7 +85,7 @@ class Home extends React.Component {
 						<img src="/assets/images/menu-top-right.png"  />
 					</div>
 					<div className="at__home__diagram" >
-						<AtBoard />
+						<AtBoard AppState={this.props.AppState} edges={this.props.AppState.edges} nodes={this.props.AppState.nodes} />
 					</div>
 				</div>
 			</div>
