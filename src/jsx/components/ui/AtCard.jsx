@@ -35,7 +35,6 @@ export default class AtCard extends React.Component {
 
 	constructor(props) {
 		super(props);
-		console.log(props);
 	}
 	componentDidMount() {
 		this.parentNode = $(this.container.current).parent();

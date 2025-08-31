@@ -40,22 +40,23 @@ export default class AtBoard extends React.Component {
 	state = {
 		nodes : this.props.AppState.nodes,
 		edges : this.props.AppState.edges,
-		selectedNodes: []
+		selectedNodes: [],
+		smoothZoom : false
     }
 	container = React.createRef()
+	controls = null
 	appData = null
 
 	constructor(props) {
 		super(props);
 		$(window).resize(this.onResize);
 		this.appData = this.props.AppState;
-		console.log("board", this.appData);
 	}
 	onResize = (e) => {}
 
 	componentDidMount() {
 		this.onResize();
-
+		
 	}
 	componentDidUpdate() {
 		console.log("componentDidUpdate");
@@ -72,7 +73,7 @@ export default class AtBoard extends React.Component {
 		this.setState((prevState) => ({
 			nodes: applyNodeChanges(changes, prevState.nodes),
 		}));
-		/*
+		/* Remove
 		[
 		    {
 		        "id": "2",
@@ -105,7 +106,6 @@ export default class AtBoard extends React.Component {
 		*/
 		let toMoveIds = changes.map(item => item.id);
 		let toMove = this.state.nodes.filter(node => toMoveIds.includes(node.id));
-		console.log("Move nodes", toMove);
 		if (toMove.length > 0) {
 			this.appData.changeNodesPositions(toMove);
 		}
@@ -172,23 +172,46 @@ export default class AtBoard extends React.Component {
 		}));
 	}
 
-	onSelectionChange({ nodes }) {
+	onSelectionChange = (nodes) => {
 		//console.log('Selected nodes:', nodes.map((node) => node.id));
 		this.setState({
 			selectedNodes: nodes.map((node) => node.id)
 		});
 	}
 
+
+	addSmoothZoom = (nodes) => {
+		console.log("smooth");
+		this.setState({ smoothZoom: true })
+	}
+	removeSmoothZoom = (nodes) => {
+		console.log("not smooth");
+		this.setState({ smoothZoom: false })
+	}
+
+	handleInit = (e) => {
+		//smooth zoom
+		this.controls = $(this.container.current).find(".react-flow__controls");
+		console.log("this.controls", this.controls);
+		this.controls.mouseenter(this.addSmoothZoom).mouseleave(this.removeSmoothZoom);
+	} 
+	
+
 	render() {
 		const { nodes, edges } = this.state;
+		const classnames = classNames({
+			"at__board" : true,
+			"at__board--smooth" : this.state.smoothZoom
+		})
 		return (
-			<div className="at__board" ref={this.container} >
+			<div className={classnames} ref={this.container} >
 				<ReactFlow
 					nodes={nodes}
 					edges={edges}
 					nodeTypes={nodeTypes}
 					onNodesChange={this.onNodesChange}
 					onEdgesChange={this.onEdgesChange}
+					onInit={this.handleInit}
 					onConnect={this.onConnect}
 					onNodeClick={this.onNodeClick}
 					defaultEdgeOptions={{ type: 'step' }}

@@ -29,8 +29,14 @@
 			//box-shadow: 0 1.6px 20px 0 rgba(74, 160, 103, 0.5);
 		}
 	}
+	&.at__board--smooth  {
+		.react-flow__viewport {
+			transition: transform 0.2s linear;
+		}
+	}
 	.react-flow__viewport {
 		//transition: transform 0.05s linear;
+		transition: none;
 	}
 	.react-flow__nodesselection-rect {
 		border-radius: 10px;
