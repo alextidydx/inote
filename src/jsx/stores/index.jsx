@@ -21,7 +21,6 @@ class appState {
 				]
 			 },
 			type: 'simepleCard',
-			className: 'custom-node',
 			sourcePosition: Position.Right,
 			targetPosition: Position.Left,
 			//selectable: false
@@ -33,6 +32,7 @@ class appState {
 				title : "Idea Node",
 				description : "Lorem Ipsum is simply dummy text of",
 				date : "2d ago",
+				linkedBoard : "1",
 				tags : [
 					"Idea"
 				]
@@ -62,32 +62,32 @@ class appState {
 	nodeWrappers = [
 		{
 			id : "4",
-			alias : 1,
-			position: { x: 280, y: 400 }, 
+			alias : "1",
+			position: { x: 180, y: 300 }, 
 			board : 0
 		},
 		{
 			id : "5",
-			alias : 2,
-			position: { x: 800, y: 545 }, 
+			alias : "2",
+			position: { x: 700, y: 545 }, 
 			board : 0
 		},
 		{
 			id : "6",
-			alias : 3,
-			position: { x: 600, y: 745 }, 
+			alias : "3",
+			position: { x: 650, y: 745 }, 
 			board : 0
 		},
 		{
 			id : "7",
-			alias : 3,
-			position: { x: 600, y: 745 }, 
+			alias : "3",
+			position: { x: 610, y: 645 }, 
 			board : 1
 		},
 		{
 			id : "8",
-			alias : 2,
-			position: { x: 800, y: 545 }, 
+			alias : "1",
+			position: { x: 780, y: 345 }, 
 			board : 1
 		}
 	]

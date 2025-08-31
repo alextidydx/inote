@@ -73,9 +73,7 @@ class Home extends React.Component {
 
     render() {
     	//// DATA
-    	let board = this.props.AppState.getBoardById(0);
-    	let nodes = board.nodes;
-    	let edges = board.edges;
+    	
 
 		return (
 		<>
@@ -90,7 +88,7 @@ class Home extends React.Component {
 						<img src="./assets/images/menu-top-right.png"  />
 					</div>
 					<div className="at__home__diagram" >
-						<AtBoard AppState={this.props.AppState} nodes={nodes} edges={edges} board={board}  />
+						<AtBoard AppState={this.props.AppState} />
 					</div>
 				</div>
 			</div>

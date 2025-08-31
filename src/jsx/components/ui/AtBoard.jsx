@@ -14,7 +14,7 @@ import '../../../styles/ui/at-board.scss'
 //embedded images
 import loader from '../../../images/loader.svg'
 import loaderBK from '../../../images/loader-bk.svg'
-
+import BackIco from '../../../images/back.svg?react'
 
 
 
@@ -62,10 +62,7 @@ export default class AtBoard extends React.Component {
 		this.appData = this.props.AppState;
 		this.isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
 
-		console.log(this.state.nodes);
-		console.log(this.state.edges);
 
-		console.log(this.props.board);
 
 		// animation timer
 		this.aTimer = new Timer(30, 30);
@@ -73,10 +70,16 @@ export default class AtBoard extends React.Component {
 		this.aTimer.finished = this.focusOnNodeFinished;
 	}
 	onResize = (e) => {}
-	componentDidMount() {this.onResize();}
+	componentDidMount() {
+		this.showBoard(0);
+	}
 	componentDidUpdate() {}
 
 	//
+
+	backClicked  = (changes) =>  {
+		this.showBoard(0);
+	}
 
 	// Handle node changes
 	onNodesChange = (changes) =>  {
@@ -185,11 +188,37 @@ export default class AtBoard extends React.Component {
 			),
 		}));
 
+		if (node.data.linkedBoard) {
+			this.showBoard(node.data.linkedBoard);
+			return;
+		}
+
 		//focus on the node
 		//this.getCenterPosition();
 		//
 		this.state.reactFlowInstance.setCenter(node.position.x + node.width*0.5, node.position.y + node.height*0.5, { zoom: 1.3, duration: 500 })
 
+	}
+
+
+
+	showBoard = (boardId) => {
+		let board = this.props.AppState.getBoardById(boardId);
+    	let nodes = board.nodes;
+    	let edges = board.edges;
+    	
+    	this.setState({
+    		board : board,
+    		nodes : nodes,
+    		edges : edges
+    	});
+		this.onResize();
+
+		if (this.state.reactFlowInstance)
+			setTimeout(() => {
+				this.state.reactFlowInstance.fitView({ zoom: 1.3, duration: 500, minZoom: 1.3});
+			},100);
+			
 	}
 	// nodes selection
 	onSelectionChange = (nodes) => {
@@ -252,12 +281,19 @@ export default class AtBoard extends React.Component {
 
 	render() {
 		const { nodes, edges } = this.state;
+		let showBack = false;
+		if (this.state.board) showBack = this.state.board.id != "0";
+
+
+			
 		const classnames = classNames({
 			"at__board" : true,
-			"at__board--smooth" : this.state.smoothZoom
+			"at__board--smooth" : this.state.smoothZoom,
+			"at__board__back--active" : showBack
 		})
 		return (
 			<div className={classnames} ref={this.container} >
+				
 				<ReactFlow
 					nodes={nodes}
 					edges={edges}
@@ -285,6 +321,8 @@ export default class AtBoard extends React.Component {
 					<Background />
 					<Controls />
 				</ReactFlow>
+
+				<div className="at__board__back" onClick={this.backClicked}><BackIco />Back</div>
 			</div>
 		)
 	}
