@@ -1,4 +1,4 @@
-@import "../vars.scss";
+@use "../vars.scss" as *;
 .at__card {
 	display: flex;
 	height: 100%;

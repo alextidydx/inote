@@ -1,4 +1,4 @@
-@import "../vars.scss";
+@use "../vars.scss" as *;
 .at__board {
 	display: flex;
 	background-color: #f00;

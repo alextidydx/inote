@@ -76,13 +76,13 @@ class Home extends React.Component {
 		<>
 			<div className="at__home" ref={this.container}>
 				<div className="at__home__menu-l" >
-					<img src="/assets/images/menu-left-top.png" />
-					<img src="/assets/images/menu-left-bottom.png"  />
+					<img src="./assets/images/menu-left-top.png" />
+					<img src="./assets/images/menu-left-bottom.png"  />
 				</div>
 				<div className="at__home__block-r" >
 					<div className="at__home__menu-t" >
-						<img src="/assets/images/menu-top-left.png" />
-						<img src="/assets/images/menu-top-right.png"  />
+						<img src="./assets/images/menu-top-left.png" />
+						<img src="./assets/images/menu-top-right.png"  />
 					</div>
 					<div className="at__home__diagram" >
 						<AtBoard AppState={this.props.AppState} edges={this.props.AppState.edges} nodes={this.props.AppState.nodes} />

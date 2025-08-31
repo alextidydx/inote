@@ -1,5 +1,5 @@
 //////vars
-@import "vars.scss";
+@use "vars.scss" as *;
 $works-margin: 40px;
 
 
