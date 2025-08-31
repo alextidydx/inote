@@ -72,6 +72,9 @@ class Home extends React.Component {
 	stopAnimation = () => {}	
 
     render() {
+    	let board = this.props.AppState.getBoardById(0);
+    	let nodes = board.nodes;
+    	let edges = board.edges;
 		return (
 		<>
 			<div className="at__home" ref={this.container}>
@@ -85,7 +88,7 @@ class Home extends React.Component {
 						<img src="./assets/images/menu-top-right.png"  />
 					</div>
 					<div className="at__home__diagram" >
-						<AtBoard AppState={this.props.AppState} edges={this.props.AppState.edges} nodes={this.props.AppState.nodes} />
+						<AtBoard AppState={this.props.AppState} nodes={nodes} edges={edges}  />
 					</div>
 				</div>
 			</div>

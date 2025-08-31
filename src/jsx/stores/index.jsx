@@ -9,8 +9,7 @@ class appState {
 	// mocked data
 	nodes = [
 		{ 
-			id: '1', 
-			position: { x: 280, y: 400 }, 
+			nid: "1", 
 			data: { 
 				click : () => { console.log("click");},
 				title : "Simple Note 1",
@@ -28,12 +27,11 @@ class appState {
 			//selectable: false
 		},
 		{ 
-			id: '2', 
-			position: { x: 800, y: 545 }, 
+			nid: "2", 
 			data: { 
 				click : () => { console.log("click");},
 				title : "Idea Node",
-				description : "Lorem Ipsum🙂 is simply dummy text of",
+				description : "Lorem Ipsum is simply dummy text of",
 				date : "2d ago",
 				tags : [
 					"Idea"
@@ -42,32 +40,14 @@ class appState {
 			type: 'ideaCard',
 			className: 'at__node-idea',
 			sourcePosition: Position.Right,
-			targetPosition: Position.Left,
-			children: {
-				nodes : [
-					{
-						id: 4,
-						position: { x: 200, y: 200},
-						alias: 1
-					},
-					{
-						id: 5,
-						position: { x: 500, y: 200},
-						alias: 3
-					}
-				],
-				edges : [
-					{ id: 'e1-3', source: '1', target: '3', type: 'step' }
-				]
-			}
+			targetPosition: Position.Left
 		},
 		{ 
-			id: '3', 
-			position: { x: 600, y: 745 }, 
+			nid: "3", 
 			data: { 
 				click : () => { console.log("click");},
 				title : "Simple Note 2",
-				description : "Lorem Ipsum🙂 is simply dummy text of the printing and typesetting industry. ",
+				description : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
 				date : "3d ago",
 				tags : [
 					"Commerce"
@@ -78,23 +58,107 @@ class appState {
 			targetPosition: Position.Left,
 		}
 	]
-	edges = [
-		{ id: 'e1-2', source: '1', target: '2', type: 'step' },
-		{ id: 'e1-3', source: '1', target: '3', type: 'step' }
+
+	nodeWrappers = [
+		{
+			id : "4",
+			alias : 1,
+			position: { x: 280, y: 400 }, 
+			board : 0
+		},
+		{
+			id : "5",
+			alias : 2,
+			position: { x: 800, y: 545 }, 
+			board : 0
+		},
+		{
+			id : "6",
+			alias : 3,
+			position: { x: 600, y: 745 }, 
+			board : 0
+		},
+		{
+			id : "7",
+			alias : 3,
+			position: { x: 600, y: 745 }, 
+			board : 1
+		},
+		{
+			id : "8",
+			alias : 2,
+			position: { x: 800, y: 545 }, 
+			board : 1
+		}
 	]
 
+	edges = [
+		{ id: 'e4-5', source: '4', target: '5', type: 'step', board : 0 },
+		{ id: 'e4-6', source: '4', target: '6', type: 'step', board : 0 },
+		{ id: 'e7-8', source: '7', target: '8', type: 'step', board : 1 }
+	]
+
+	boards = [
+		{
+			id : "0",
+			name : "Mainboard",
+			main : true
+			// nodes            
+		},
+		{
+			id : "1",
+			name : "Mainboard",
+			main : false
+			// nodes            
+		}
+	]
+
+
+
+		
 	// persistance 
 	constructor() {
 		makeAutoObservable(this)
 		makePersistable(this, {
 			name: 'AppState',
-			properties: ['nodes', 'edges'],
+			properties: ['nodes', 'nodeWrappers', 'edges', 'boards'],
 			storage: window.localStorage
 		});
 
 	}
 
+	getBoardById(boardId) {
+		//get all nodes with parent = boardId
+		let board = this.boards.find(board => board.id == boardId);
+		let nodesWrappers = this.nodeWrappers.filter(nodeW => nodeW.board == boardId);
+		let nodeObj = [];
+		nodesWrappers.forEach(nodeW => {
+			const nodeI = this.nodes.findIndex(node => node.nid == nodeW.alias);
+			if (nodeI !== -1) {
+				nodeObj.push({ ...nodeW, ...this.nodes[nodeI] });
+			}
+		});
+		console.log(nodeObj[0].position.x);
+		let edges = this.edges.filter(edge => edge.board == boardId);
+		let boardData = { 
+			...board,
+			nodes : nodeObj,
+			edges : edges
+		}
+		console.log(boardData);
+
+		return boardData;
+	}
+
+	getNodeWrapperWithObj(wrapperId) {
+		let nodeWrapper = this.nodes.findIndex(node => node.id === nodeId);
+
+		let node = this.nodes.findIndex(node => node.id === nodeId);
+
+	}
+
 	// EDGES ////////////////////////////////////////////////////
+	/*
 	addEdge(data) {
 		console.log("-addEdge", data);
 		//check if we have this edge
@@ -146,13 +210,9 @@ class appState {
 		const nodeIdsToRemove = data.map(item => item.id);
 		this.nodes = this.nodes.filter(edge => !nodeIdsToRemove.includes(edge.id));
 	}
+	*/
 
-	get getNodes() {
-		return this.nodes;
-	}
-	get getEdges() {
-		return this.nodes;
-	}
+	
 }
 
 const AppState = new appState();
