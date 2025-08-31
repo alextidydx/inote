@@ -28,6 +28,7 @@ $works-margin: 40px;
 	height: 100%;
 	position: relative;
 	user-select: none;
+	border-right: solid 1px #e5e5e5;
 	img:nth-of-type(1) {
 	}
 	img:nth-of-type(2) {
@@ -48,7 +49,7 @@ $works-margin: 40px;
 	width: 100%;
 	display: flex;
 	position: relative;
-	user-select: none;
+	border-bottom: solid 1px #e5e5e5;
 	img:nth-of-type(1) {
 	}
 	img:nth-of-type(2) {
