@@ -46,33 +46,31 @@ export default class AtBoard extends React.Component {
 		nodes : this.props.AppState.nodes,
 		edges : this.props.AppState.edges,
 		selectedNodes: [],
-		smoothZoom : false
+		smoothZoom : false,
+		reactFlowInstance : null
     }
 	container = React.createRef()
 	controls = null
 	appData = null
-	isMac = false
+	isMac = false // used for controls
+	aTimer = null
 
 	constructor(props) {
 		super(props);
 		$(window).resize(this.onResize);
 		this.appData = this.props.AppState;
-		this.isMac = navigator.platform.toUpperCase().indexOf('MAC')>=0;
+		this.isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+
+		// animation timer
+		this.aTimer = new Timer(30, 30);
+		this.aTimer.progress = this.focusOnNodeProcess;
+		this.aTimer.finished = this.focusOnNodeFinished;
 	}
 	onResize = (e) => {}
+	componentDidMount() {this.onResize();}
+	componentDidUpdate() {}
 
-	componentDidMount() {
-		this.onResize();
-		
-	}
-	componentDidUpdate() {
-		console.log("componentDidUpdate");
-	}
-	setHTMLData = (_data) => {
-		$(this.htmlContainer.current).html(_data);
-		$(this.htmlContainer.current).scrollTop(0);
-		this.setImgOnLoad();
-	}
+	//
 
 	// Handle node changes
 	onNodesChange = (changes) =>  {
@@ -170,15 +168,21 @@ export default class AtBoard extends React.Component {
 
 	// Handle node click
 	onNodeClick = (event, node) => {
-		//console.log('Node clicked:', node);
+		console.log('Node clicked:', node);
 		// Update node label on click
 		this.setState((prevState) => ({
 			nodes: prevState.nodes.map((n) =>
 				n.id === node.id ? { ...n, data: { ...n.data, label: `${n.data.label} (Clicked)` } } : n
 			),
 		}));
-	}
 
+		//focus on the node
+		//this.getCenterPosition();
+
+		this.state.reactFlowInstance.setCenter(node.position.x + node.width*0.5, node.position.y + node.height*0.5, { zoom: 1.3, duration: 500 })
+
+	}
+	// nodes selection
 	onSelectionChange = (nodes) => {
 		//console.log('Selected nodes:', nodes.map((node) => node.id));
 		this.setState({
@@ -187,6 +191,38 @@ export default class AtBoard extends React.Component {
 	}
 
 
+	
+	// react flow init
+	handleInit = (reactFlowInstance) => {
+		this.setState({ reactFlowInstance });
+		console.log("reactFlowInstance", reactFlowInstance.getViewport());
+		//smooth zoom
+		this.controls = $(this.container.current).find(".react-flow__controls");
+		console.log("this.controls", this.controls);
+		this.controls.mouseenter(this.addSmoothZoom).mouseleave(this.removeSmoothZoom);
+	}
+
+
+
+	/// control the pane
+	zoomIn() {
+		if (this.state.reactFlowInstance) {
+			this.state.reactFlowInstance.zoomIn();
+		}
+	}
+
+	zoomOut() {
+		if (this.state.reactFlowInstance) {
+		this.state.reactFlowInstance.zoomOut();
+		}
+	}
+
+	movePane() {
+		if (this.state.reactFlowInstance) {
+			this.state.reactFlowInstance.setViewport({ x: 200, y: 150, zoom: 1 }); // Move to x:200, y:150, zoom:1
+		}
+	}
+	// smooth zoom for the side controls
 	addSmoothZoom = (nodes) => {
 		console.log("smooth");
 		this.setState({ smoothZoom: true })
@@ -196,13 +232,14 @@ export default class AtBoard extends React.Component {
 		this.setState({ smoothZoom: false })
 	}
 
-	handleInit = (e) => {
-		//smooth zoom
-		this.controls = $(this.container.current).find(".react-flow__controls");
-		console.log("this.controls", this.controls);
-		this.controls.mouseenter(this.addSmoothZoom).mouseleave(this.removeSmoothZoom);
-	} 
-	
+
+	// focus zoom
+	focusOnNodeProcess = (e) => {
+	}
+	focusOnNodeFinished = (e) => {
+	}
+
+
 
 	render() {
 		const { nodes, edges } = this.state;
@@ -220,7 +257,8 @@ export default class AtBoard extends React.Component {
 					onEdgesChange={this.onEdgesChange}
 					onInit={this.handleInit}
 					onConnect={this.onConnect}
-					onNodeClick={this.onNodeClick}
+					//onNodeClick={this.onNodeClick}
+					onNodeDoubleClick={this.onNodeClick}
 					defaultEdgeOptions={{ type: 'step' }}
 					minZoom={0.5}
 					maxZoom={1.3}

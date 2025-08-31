@@ -7,7 +7,7 @@ class Timer {
 	progress = null
 	finished = null
 
-	constructor(_total, _fps) {
+	constructor(_total, _fps) { // number of frames and fps
 		this.total = _total;
 		this.interval = 1000/_fps;
 		this.fps = _fps;

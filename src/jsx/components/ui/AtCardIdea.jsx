@@ -125,14 +125,15 @@ export default class AtCardIdea extends React.Component {
 				</div>
 				<div className="at__card__date">{ this.props.data.date }</div>
 				<NodeResizer minWidth={100} minHeight={30} onResize={this.onResize} onResizeStart={this.onResizeStart} onResizeEnd={this.onResizeEnd} />
-				<Handle type="target" position="left" />
-				<Handle type="source" position="right" />
-
 				<div className="at__card-idea__bk-card-cont">
 					<div className="at__card-idea__bk-card"></div>
 					<div className="at__card-idea__bk-card"></div>
 					<div className="at__card-idea__bk-card"></div>
 				</div>
+				<Handle type="target" position="left" />
+				<Handle type="source" position="right" />
+
+
 				
 			</div>
 		)
