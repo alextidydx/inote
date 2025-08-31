@@ -72,6 +72,45 @@ export default class AtBoard extends React.Component {
 		this.setState((prevState) => ({
 			nodes: applyNodeChanges(changes, prevState.nodes),
 		}));
+		/*
+		[
+		    {
+		        "id": "2",
+		        "type": "remove"
+		    },
+		    {
+		        "id": "3",
+		        "type": "remove"
+		    }
+		]
+		*/
+		let toDelete = changes.filter(node => node.type == "remove");
+		if (toDelete.length > 0) {
+			this.appData.removeNodes(toDelete);
+		}
+
+		/* Position
+		 [
+		    {
+		        "id": "2",
+		        "type": "position",
+		        "dragging": false
+		    },
+		    {
+		        "id": "3",
+		        "type": "position",
+		        "dragging": false
+		    }
+		]
+		*/
+		let toMoveIds = changes.map(item => item.id);
+		let toMove = this.state.nodes.filter(node => toMoveIds.includes(node.id));
+		console.log("Move nodes", toMove);
+		if (toMove.length > 0) {
+			this.appData.changeNodesPositions(toMove);
+		}
+
+		
 	}
 
 	// Handle edge changes
@@ -86,12 +125,19 @@ export default class AtBoard extends React.Component {
 		    {
 		        "id": "e1-2",
 		        "type": "remove"
+		    },
+		    {
+		        "id": "e2-1",
+		        "type": "remove"
 		    }
 		]
 		*/
-		if (changes[0].type == "remove") {
-			this.appData.removeEdge(changes);
+		let toDelete = changes.filter(edge => edge.type == "remove");
+		//console.log("Delete edges", toDelete);
+		if (toDelete.length > 0) {
+			this.appData.removeEdges(toDelete);
 		}
+
 	}
 
 	// Handle new connections
@@ -117,7 +163,7 @@ export default class AtBoard extends React.Component {
 
 	// Handle node click
 	onNodeClick = (event, node) => {
-		console.log('Node clicked:', node);
+		//console.log('Node clicked:', node);
 		// Update node label on click
 		this.setState((prevState) => ({
 			nodes: prevState.nodes.map((n) =>
@@ -127,7 +173,7 @@ export default class AtBoard extends React.Component {
 	}
 
 	onSelectionChange({ nodes }) {
-		console.log('Selected nodes:', nodes.map((node) => node.id));
+		//console.log('Selected nodes:', nodes.map((node) => node.id));
 		this.setState({
 			selectedNodes: nodes.map((node) => node.id)
 		});
