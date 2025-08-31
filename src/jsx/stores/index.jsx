@@ -13,7 +13,7 @@ class appState {
 			position: { x: 280, y: 400 }, 
 			data: { 
 				click : () => { console.log("click");},
-				title : "Node Example 1",
+				title : "Simple Note 1",
 				description : "Lorem Ipsum🙂 is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap ",
 				date : "1d ago",
 				tags : [
@@ -22,6 +22,7 @@ class appState {
 				]
 			 },
 			type: 'simepleCard',
+			className: 'custom-node',
 			sourcePosition: Position.Right,
 			targetPosition: Position.Left,
 			//selectable: false
@@ -31,23 +32,41 @@ class appState {
 			position: { x: 800, y: 545 }, 
 			data: { 
 				click : () => { console.log("click");},
-				title : "Node Example 2",
+				title : "Idea Node",
 				description : "Lorem Ipsum🙂 is simply dummy text of",
 				date : "2d ago",
 				tags : [
-					"Forex"
+					"Idea"
 				]
 			 },
-			type: 'simepleCard',
+			type: 'ideaCard',
+			className: 'at__node-idea',
 			sourcePosition: Position.Right,
 			targetPosition: Position.Left,
+			children: {
+				nodes : [
+					{
+						id: 4,
+						position: { x: 200, y: 200},
+						alias: 1
+					},
+					{
+						id: 5,
+						position: { x: 500, y: 200},
+						alias: 3
+					}
+				],
+				edges : [
+					{ id: 'e1-3', source: '1', target: '3', type: 'step' }
+				]
+			}
 		},
 		{ 
 			id: '3', 
 			position: { x: 600, y: 745 }, 
 			data: { 
 				click : () => { console.log("click");},
-				title : "Node Example 3",
+				title : "Simple Note 2",
 				description : "Lorem Ipsum🙂 is simply dummy text of the printing and typesetting industry. ",
 				date : "3d ago",
 				tags : [

@@ -23,14 +23,19 @@ import ReactFlow, {
 	applyNodeChanges,
 	applyEdgeChanges,
 	Background,
+	SelectionMode,
 	Position,
 	Controls,
 } from 'reactflow';
+
+
 // custom nodes
 import AtCard from './AtCard';
+import AtCardIdea from './AtCardIdea';
 
 const nodeTypes = {
 	simepleCard: AtCard,
+	ideaCard: AtCardIdea
 };
 
 
@@ -46,11 +51,13 @@ export default class AtBoard extends React.Component {
 	container = React.createRef()
 	controls = null
 	appData = null
+	isMac = false
 
 	constructor(props) {
 		super(props);
 		$(window).resize(this.onResize);
 		this.appData = this.props.AppState;
+		this.isMac = navigator.platform.toUpperCase().indexOf('MAC')>=0;
 	}
 	onResize = (e) => {}
 
@@ -219,7 +226,13 @@ export default class AtBoard extends React.Component {
 					maxZoom={1.3}
 					selectionOnDrag={true} // Enable rectangle selection
           			deleteKeyCode={'Delete'}
-          			panOnDrag={[1]}
+
+          			//panOnDrag={[1]}
+
+					panOnScroll={this.isMac} //pan on scroll for MAC
+					selectionOnDrag
+					panOnDrag={[1, 2]}
+					selectionMode={SelectionMode.Partial}
 					fitView
 				>
 					<Background />
