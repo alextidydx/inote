@@ -63,19 +63,19 @@ class appState {
 		{
 			id : "4",
 			alias : "1",
-			position: { x: 180, y: 300 }, 
+			position: { x: 550, y: 100 }, 
 			board : 0
 		},
 		{
 			id : "5",
 			alias : "2",
-			position: { x: 700, y: 545 }, 
+			position: { x: 180, y: 345 }, 
 			board : 0
 		},
 		{
 			id : "6",
 			alias : "3",
-			position: { x: 650, y: 745 }, 
+			position: { x: 1050, y: 445 }, 
 			board : 0
 		},
 		{
@@ -93,7 +93,7 @@ class appState {
 	]
 
 	edges = [
-		{ id: 'e4-5', source: '4', target: '5', type: 'step', board : 0 },
+		{ id: 'e5-4', source: '5', target: '4', type: 'step', board : 0 },
 		{ id: 'e4-6', source: '4', target: '6', type: 'step', board : 0 },
 		{ id: 'e7-8', source: '7', target: '8', type: 'step', board : 1 }
 	]
