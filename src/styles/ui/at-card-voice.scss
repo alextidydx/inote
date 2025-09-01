@@ -1,0 +1,18 @@
+@use "../vars.scss" as *;
+
+
+.at__card-voice {
+	.react-flow__resize-control.nodrag.bottom.right.handle
+	{
+		display: none;
+	}
+}
+
+.at__card-voice__img {
+	position: relative;
+	width: 100%;
+	padding-top: 10%;
+	border-radius: 12px;
+	background-size: cover;
+	margin-bottom: 12px;
+}

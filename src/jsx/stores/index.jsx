@@ -46,14 +46,32 @@ class appState {
 			nid: "3", 
 			data: { 
 				click : () => { console.log("click");},
-				title : "Simple Note 2",
+				title : "Article",
+				imgSrc : "./assets/images/nyse.jpg",
 				description : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
-				date : "3d ago",
+				link : "",
+				date : "4d ago",
 				tags : [
 					"Commerce"
 				]
 			 },
-			type: 'simepleCard',
+			type: 'articleCard',
+			sourcePosition: Position.Right,
+			targetPosition: Position.Left,
+		},
+		{ 
+			nid: "4", 
+			data: { 
+				click : () => { console.log("click");},
+				title : "Voice memo",
+				description : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+				link : "",
+				date : "4d ago",
+				tags : [
+					"Voice"
+				]
+			 },
+			type: 'voiceCard',
 			sourcePosition: Position.Right,
 			targetPosition: Position.Left,
 		}
@@ -89,13 +107,20 @@ class appState {
 			alias : "1",
 			position: { x: 780, y: 345 }, 
 			board : 1
+		},
+		{
+			id : "9",
+			alias : "4",
+			position: { x: 550, y: 445 }, 
+			board : 0
 		}
 	]
 
 	edges = [
 		{ id: 'e5-4', source: '5', target: '4', type: 'step', board : 0 },
 		{ id: 'e4-6', source: '4', target: '6', type: 'step', board : 0 },
-		{ id: 'e7-8', source: '7', target: '8', type: 'step', board : 1 }
+		{ id: 'e9-6', source: '9', target: '6', type: 'step', board : 0 },
+		{ id: 'e7-8', source: '7', target: '8', type: 'step', board : 1 }		
 	]
 
 	boards = [

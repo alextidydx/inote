@@ -32,10 +32,14 @@ import ReactFlow, {
 // custom nodes
 import AtCard from './AtCard';
 import AtCardIdea from './AtCardIdea';
+import AtCardArticle from './AtCardArticle';
+import AtCardVoice from './AtCardVoice';
 
 const nodeTypes = {
 	simepleCard: AtCard,
-	ideaCard: AtCardIdea
+	ideaCard: AtCardIdea,
+	articleCard: AtCardArticle,
+	voiceCard: AtCardVoice
 };
 
 

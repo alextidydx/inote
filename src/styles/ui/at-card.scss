@@ -16,7 +16,7 @@
 	width: 100%;
 	transition: transform 0.1s ease-in-out;
 	.at__card--dragging & {
-		transform: scale(1.01);
+		//transform: scale(1.01);
 	}
 }
 .at__card__label {
@@ -61,7 +61,7 @@
 		line-height: 18px;
 		//position: absolute;
 	}
-	&:before {
+	&:after {
 		pointer-events: none;
 		position: absolute;
 		content: '';
@@ -69,8 +69,8 @@
 		width: 100%;
 		height: 22px;
 		left: 0;
-		bottom: 0;
-		z-index: 0;
+		bottom: 0px;
+		z-index: 1;
 		background: linear-gradient(0deg,rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255, 0) 100%);
 		opacity: 0;
 		transition: opacity 0.1s linear;

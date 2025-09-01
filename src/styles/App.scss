@@ -42,15 +42,24 @@ body, at__body {
 }
 
 a {
-	color: #000;
+	color: $accent-color;
 	text-decoration: none;
 	transition: 0.2s linear background-color;
 	background-color: transparent;
 	//background-color: #fff;
 	&:hover {
 		//background-color: #ffd800;
-		color: #000;
+		color: $accent-color-hover;
 		
+	}
+	&:active {
+		color: $accent-color-active;
+	}
+
+	svg  {
+		stroke: $accent-color;
+		outline: $accent-color;
+		fill: $accent-color;
 	}
 }
 

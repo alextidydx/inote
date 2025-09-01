@@ -1,0 +1,33 @@
+@use "../vars.scss" as *;
+
+
+.at__card-article {
+	
+
+}
+
+.at__card-article__img {
+	position: relative;
+	background-color: #aaa;
+	width: 100%;
+	padding-top: 66.5%;
+	border-radius: 12px;
+	background-size: cover;
+	margin-bottom: 12px;
+}
+
+.at__card__label {
+	
+	a {
+		display: flex;
+		margin:5px 0px 3px 0px;
+		font-size: 14px;
+		align-items: center;
+		white-space: nowrap;
+		svg {
+			width: 14px;
+			height: 14px;
+			margin-left: 4px;
+		}
+	}
+}
