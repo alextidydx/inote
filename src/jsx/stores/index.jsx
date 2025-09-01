@@ -74,6 +74,21 @@ class appState {
 			type: 'voiceCard',
 			sourcePosition: Position.Right,
 			targetPosition: Position.Left,
+		},
+		{ 
+			nid: "5", 
+			data: { 
+				click : () => { console.log("click");},
+				title : "TradingView BTC",
+				imgSrc : "./assets/images/ticker.png",
+				date : "4d ago",
+				tags : [
+					"Crypto"
+				]
+			 },
+			type: 'tickerCard',
+			sourcePosition: Position.Right,
+			targetPosition: Position.Left,
 		}
 	]
 
@@ -99,7 +114,7 @@ class appState {
 		{
 			id : "7",
 			alias : "3",
-			position: { x: 610, y: 645 }, 
+			position: { x: 310, y: 645 }, 
 			board : 1
 		},
 		{
@@ -113,6 +128,12 @@ class appState {
 			alias : "4",
 			position: { x: 550, y: 445 }, 
 			board : 0
+		},
+		{
+			id : "10",
+			alias : "5",
+			position: { x: 350, y: 255 }, 
+			board : 1
 		}
 	]
 
@@ -120,7 +141,8 @@ class appState {
 		{ id: 'e5-4', source: '5', target: '4', type: 'step', board : 0 },
 		{ id: 'e4-6', source: '4', target: '6', type: 'step', board : 0 },
 		{ id: 'e9-6', source: '9', target: '6', type: 'step', board : 0 },
-		{ id: 'e7-8', source: '7', target: '8', type: 'step', board : 1 }		
+		{ id: 'e7-8', source: '7', target: '8', type: 'step', board : 1 },
+		{ id: 'e10-8', source: '10', target: '8', type: 'step', board : 1 }		
 	]
 
 	boards = [

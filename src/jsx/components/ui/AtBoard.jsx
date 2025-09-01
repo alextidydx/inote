@@ -17,6 +17,9 @@ import loaderBK from '../../../images/loader-bk.svg'
 import BackIcon from '../../../images/back.svg?react'
 import PenIcon from '../../../images/note-pen.svg?react'
 import AiIcon from '../../../images/ai.svg?react'
+import QueueIcon from '../../../images/queue.svg?react'
+
+
 
 
 import ReactFlow, {
@@ -35,12 +38,15 @@ import AtCard from './AtCard';
 import AtCardIdea from './AtCardIdea';
 import AtCardArticle from './AtCardArticle';
 import AtCardVoice from './AtCardVoice';
+import AtCardTicker from './AtCardTicker';
+
 
 const nodeTypes = {
 	simepleCard: AtCard,
 	ideaCard: AtCardIdea,
 	articleCard: AtCardArticle,
-	voiceCard: AtCardVoice
+	voiceCard: AtCardVoice,
+	tickerCard: AtCardTicker
 };
 
 
@@ -55,6 +61,7 @@ export default class AtBoard extends React.Component {
 		smoothZoom : false,
 		reactFlowInstance : null,
 		showChat : false,
+		showQueue : false
     }
 	container = React.createRef()
 	controls = null
@@ -222,7 +229,7 @@ export default class AtBoard extends React.Component {
 
 		if (this.state.reactFlowInstance)
 			setTimeout(() => {
-				this.state.reactFlowInstance.fitView({ zoom: 1.3, duration: 500, minZoom: 1.3});
+				this.state.reactFlowInstance.fitView({  duration: 500, minZoom: 0.5});
 			},100);
 			
 	}
@@ -277,7 +284,10 @@ export default class AtBoard extends React.Component {
 	}
 
 	toggleChat = (nodes) => {
-		this.setState({ showChat: !this.state.showChat })
+		this.setState({ showChat: !this.state.showChat, showQueue: false });
+	}
+	toggleQueue = (nodes) => {
+		this.setState({ showQueue: !this.state.showQueue, showChat: false });
 	}
 
 
@@ -300,6 +310,7 @@ export default class AtBoard extends React.Component {
 			"at__board" : true,
 			"at__board--smooth" : this.state.smoothZoom,
 			"at__board__back--active" : showBack,
+			"at__board__back--queue-open" : this.state.showQueue,
 			"at__board__back--chat-open" : this.state.showChat
 		})
 		return (
@@ -336,6 +347,9 @@ export default class AtBoard extends React.Component {
 				<div className="at__board__back" onClick={this.backClicked}><BackIcon />Back</div>
 				<div className="at__board__create" >
 					<div className="at__board__create-note at__board__create-btn"><PenIcon /></div>
+					<div className="at__board__create-queue at__board__create-btn" onClick={this.toggleQueue}><QueueIcon />
+						<div className="at__board__create-queue-popup"><img src="./assets/images/queue.png" /></div>
+					</div>
 					<div className="at__board__create-ai at__board__create-btn" onClick={this.toggleChat}><AiIcon />
 						<div className="at__board__create-ai-popup"><img src="./assets/images/ai-chat.png" /></div>
 					</div>

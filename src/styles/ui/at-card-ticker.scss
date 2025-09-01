@@ -1,0 +1,18 @@
+@use "../vars.scss" as *;
+
+
+.at__card-ticker {
+	.react-flow__resize-control.nodrag.bottom.right.handle
+	{
+		display: none;
+	}
+}
+
+.at__card-ticker__img {
+	position: relative;
+	width: 261px;
+	height: 160px;
+	border-radius: 12px;
+	background-size: cover;
+	margin-bottom: 12px;
+}
