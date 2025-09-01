@@ -14,8 +14,9 @@ import '../../../styles/ui/at-board.scss'
 //embedded images
 import loader from '../../../images/loader.svg'
 import loaderBK from '../../../images/loader-bk.svg'
-import BackIco from '../../../images/back.svg?react'
-
+import BackIcon from '../../../images/back.svg?react'
+import PenIcon from '../../../images/note-pen.svg?react'
+import AiIcon from '../../../images/ai.svg?react'
 
 
 import ReactFlow, {
@@ -52,7 +53,8 @@ export default class AtBoard extends React.Component {
 		edges : this.props.edges,
 		selectedNodes: [],
 		smoothZoom : false,
-		reactFlowInstance : null
+		reactFlowInstance : null,
+		showChat : false,
     }
 	container = React.createRef()
 	controls = null
@@ -274,6 +276,10 @@ export default class AtBoard extends React.Component {
 		this.setState({ smoothZoom: false })
 	}
 
+	toggleChat = (nodes) => {
+		this.setState({ showChat: !this.state.showChat })
+	}
+
 
 	// focus zoom
 	focusOnNodeProcess = (e) => {
@@ -293,7 +299,8 @@ export default class AtBoard extends React.Component {
 		const classnames = classNames({
 			"at__board" : true,
 			"at__board--smooth" : this.state.smoothZoom,
-			"at__board__back--active" : showBack
+			"at__board__back--active" : showBack,
+			"at__board__back--chat-open" : this.state.showChat
 		})
 		return (
 			<div className={classnames} ref={this.container} >
@@ -326,7 +333,13 @@ export default class AtBoard extends React.Component {
 					<Controls />
 				</ReactFlow>
 
-				<div className="at__board__back" onClick={this.backClicked}><BackIco />Back</div>
+				<div className="at__board__back" onClick={this.backClicked}><BackIcon />Back</div>
+				<div className="at__board__create" >
+					<div className="at__board__create-note at__board__create-btn"><PenIcon /></div>
+					<div className="at__board__create-ai at__board__create-btn" onClick={this.toggleChat}><AiIcon />
+						<div className="at__board__create-ai-popup"><img src="./assets/images/ai-chat.png" /></div>
+					</div>
+				</div>
 			</div>
 		)
 	}

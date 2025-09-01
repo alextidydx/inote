@@ -97,19 +97,20 @@
 
 	.react-flow__controls {
 		position: absolute;
-		right: 20px;
-		left: auto;
-		top: 50%;
-		bottom: auto;
-		width: 40px;
-		height: 160px;
+		right: 5px;
+		left: 45%;
+		top: auto;
+		bottom: -5px;
+		width: 160px;
+		height: 40px;
 		transform: translate(0, -50%);
 		
 		background: rgba(0, 0, 0, 0.80);
 		border-radius: 10px;
 		box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
+		backdrop-filter: blur(10px);
 		button {
 			background: none;
 			border: 0;
@@ -156,5 +157,70 @@
 	.at__board__back--active & {
 		opacity: 1.0;
 		pointer-events: all;
+	}
+}
+
+.at__board__create {
+	width: 120px;
+	height: 60px;
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	background-color: rgba(0,0,0,0.8);
+	border-radius: 12px;
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.35);
+	backdrop-filter: blur(4px);
+	display: flex;
+	.at__board__create-btn {
+		width: 60px;
+		height: 60px;
+		display: flex;
+		border-radius: 0 12px 12px 0;
+		align-items: center;
+		justify-content: center;
+		svg path {
+		}
+		cursor: pointer;
+		user-select: none;
+		transition: opacity 0.1s linear, background-color 0.1s linear;
+	}
+}
+
+.at__board__create-note {
+	svg path {
+		stroke: #fff
+	}
+}
+
+.at__board__create-ai {
+	width: 60px;
+	height: 60px;
+	background-color: $purple-color;
+	display: flex;
+	border-radius: 0 12px 12px 0;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	&:hover {
+		background-color: $purple-color-hover;
+	}
+	&:active {
+		background-color: $purple-color-active;
+	}
+}
+
+.at__board__create-ai-popup {
+	position: absolute;
+	right: 0;
+	bottom: 60px;
+	width: 320px;
+	height: 604px;
+	opacity: 0.0;
+	transition: opacity 0.1s linear, background-color 0.1s linear;
+	img {
+		width: 100%;
+	}
+	.at__board__back--chat-open & {
+		opacity: 1.0;
 	}
 }
